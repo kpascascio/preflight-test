@@ -1,0 +1,96 @@
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.18.0/axios.min.js"></script>
+</head>
+
+<body>
+
+    <button id="test">Try out a GET request Using Fetch </button>
+    <script>
+        const btnTest = document.querySelector('#test')
+
+        btnTest.addEventListener('click', () => {
+            fetch('http://localhost:3000/')
+                .then(response => response.text())
+                .then(parsed => console.log(parsed))
+        })
+    </script>
+
+    <button id="testAxios">Try out a GET request Using Axios </button>
+    <script>
+        const btnTestAxios = document.querySelector('#testAxios')
+
+        btnTestAxios.addEventListener('click', () => {
+
+            axios.get('http://localhost:3000/')
+                .then((data) => console.log(data))
+        })
+    </script>
+
+    <button id="testPost">Try out a POST request Using Fetch </button>
+    <script>
+        const btnTestPost = document.querySelector('#testPost')
+
+        btnTestPost.addEventListener('click', () => {
+            fetch('http://localhost:3000/api/testing', {
+                    headers: {
+                        'Content-type': 'application/json',
+                        'Authorization': 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6OCwiaWF0IjoxNTIyMTczNTk0LCJleHAiOjE1MjIyNTk5OTR9.n6bCuxf-M-U0s_sFnG8RUjMtY1SNcNacE8rYM44fEtA'
+                    },
+                    method: 'POST',
+                    body: JSON.stringify({
+                        name: 'test'
+                    })
+                })
+                .then(response => response.text())
+                .then(parsed => console.log(parsed))
+        })
+    </script>
+
+    <button id="testPostHeaders">Try out a POST request Using Fetch without Headers </button>
+    <script>
+        const btnTestPostHeaders = document.querySelector('#testPostHeaders')
+
+        btnTestPostHeaders.addEventListener('click', () => {
+            fetch('http://localhost:3000/api/testing', {
+                    method: 'POST',
+                    body: JSON.stringify({
+                        name: 'test'
+                    })
+                })
+                .then(response => response.text())
+                .then(parsed => console.log(parsed))
+        })
+    </script>
+
+    <button id="testPostAxios">Try out a POST request Using Axios Without Headers </button>
+    <script>
+        const btnTestPostAxios = document.querySelector('#testPostAxios')
+
+        btnTestPostAxios.addEventListener('click', () => {
+            axios.post('http://localhost:3000/api/testing', JSON.stringify({
+                    'name': 'test'
+                }))
+                .then((data) => console.log(data))
+        })
+    </script>
+    <button id="testPostAxiosHeaders">Try out a POST request Using Axios </button>
+    <script>
+        const btnTestPostAxiosHeaders = document.querySelector('#testPostAxiosHeaders')
+
+        btnTestPostAxiosHeaders.addEventListener('click', () => {
+            axios.defaults.headers.common['Authorization'] = 'token';
+            axios.post('http://localhost:3000/api/testing', JSON.stringify({
+                    'name': 'test'
+                }))
+                .then((data) => console.log(data))
+        })
+    </script>
+</body>
+
+</html>
